@@ -16,6 +16,7 @@ json = json_from('https://raw.githubusercontent.com/centraldedados/parlamento-de
 json.values.each do |v|
   mp_data = { 
     id: v[:id],
+    identifier__parlamento: v[:id],
     name: v[:shortname],
     full_name: v[:name],
     birth_date: v[:birthdate],
