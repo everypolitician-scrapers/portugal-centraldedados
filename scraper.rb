@@ -2,7 +2,6 @@
 # encoding: utf-8
 # frozen_string_literal: true
 
-require 'date'
 require 'json'
 require 'open-uri'
 require 'pry'
@@ -11,6 +10,8 @@ require 'scraperwiki'
 def json_from(url)
   JSON.parse(open(url).read, symbolize_names: true)
 end
+
+ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
 
 added = Hash.new(0)
 json = json_from('https://raw.githubusercontent.com/centraldedados/parlamento-deputados/master/data/deputados.json')
@@ -35,6 +36,7 @@ json.values.each do |v|
     }
 
     data = mp_data.merge term_data
+    # puts data
     ScraperWiki.save_sqlite(%i(id term), data)
     added[term_data[:term]] += 1
   end
