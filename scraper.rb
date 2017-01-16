@@ -23,7 +23,7 @@ json.values.each do |v|
     full_name:              v[:name],
     birth_date:             v[:birthdate],
     image:                  v[:image_url],
-    source:                 v[:url],
+    source:                 v[:url_parlamento],
   }
 
   v[:mandates].each do |m|
